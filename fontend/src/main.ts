@@ -9,6 +9,8 @@ import './assets/css/icon.css';
 
 import axios from "axios";
 
+// import VueCoreVideoPlayer from 'vue-core-video-player'
+
 axios.defaults.baseURL = "http://localhost:5000"
 axios.defaults.headers["Content-Type"] =  "application/json;charset=UTF-8"
 
@@ -16,6 +18,7 @@ axios.defaults.headers["Content-Type"] =  "application/json;charset=UTF-8"
 const app = createApp(App);
 app.use(createPinia());
 app.use(router);
+// app.use(VueCoreVideoPlayer)
 
 // 注册elementplus图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

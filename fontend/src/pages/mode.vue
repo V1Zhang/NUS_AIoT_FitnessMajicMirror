@@ -2,7 +2,7 @@
   <div id="page_container" style="text-align: center; padding: 5px;">
     <div class="action-list">
       <div
-        v-for="(action, index) in actions"
+        v-for="action in actions"
         :key="action.id"
         class="action-item"
         :class="{ 'active': selectedAction === action }"
@@ -20,8 +20,13 @@
     </div>
   </div>
 </template>
-  
+
   <script>
+  import img1 from '../assets/img/foream_plank.png'
+  import img2 from '../assets/img/push_up.png'
+  import img3 from '../assets/img/sumo_glute_bridge.png'
+  import img4 from '../assets/img/lying_leg_raise.png'
+
   export default {
     data() {
       return {
@@ -30,22 +35,22 @@
           {
             id: 1,
             name: 'Foream Plank',
-            imageUrl: '../assets/img/foream_plank.png'
+            imageUrl: img1
           },
           {
             id: 2,
             name: 'Push-up',
-            imageUrl: '../assets/img/push_up.png'
+            imageUrl: img2
           },
           {
             id: 3,
-            name: 'Jumping',
-            imageUrl: '../assets/img/foream_plank.png'
+            name: 'Sumo Glute Bridge',
+            imageUrl: img3
           },
           {
             id: 4,
-            name: 'Dancing',
-            imageUrl: '../assets/img/foream_plank.png'
+            name: 'Lying Leg Raise',
+            imageUrl: img4
           }
         ]
       }
@@ -89,7 +94,7 @@
   }
   
   .action-item {
-    width: 300px; 
+    width: 250px; 
     border: 3px solid #FFFFFF; /* 设置按钮的边界粗细和颜色 */
     margin-top: 18px; /* 设置合适的上部外框的宽度 */
     text-align: center;
@@ -99,7 +104,7 @@
     border-radius: 30px; /* 将按钮的左右边框设置为圆弧 */
     cursor: pointer;
     display: flex;
-    align-items: center;
+    align-items: center;/* 垂直居中 */
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
