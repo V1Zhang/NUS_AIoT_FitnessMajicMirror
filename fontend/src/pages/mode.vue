@@ -66,7 +66,15 @@
     },
     handleActionClick(action) {
       console.log(`Selected action: ${action.name}`);
-      this.$router.push('/interaction');
+      const FPath = 'http://localhost:5000/vueflask'
+      axios.post(FPath, this.$refs.action.id.value)
+      .then(response => {
+        console.log(response.data)
+        this.$router.push('/interaction');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     }
   }
 }

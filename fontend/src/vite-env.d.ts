@@ -12,4 +12,12 @@ declare module 'vue-core-video-player' {
   
     export function install(app: App, ...options: any[]): void
   }
-
+  declare module 'flask_cors' {
+    import { Application } from 'flask';
+  
+    export function CORS(
+        app: Application,
+        resources?: string | RegExp | Record<string, any>,
+        options?: CORSOptions
+      ): void;
+    }

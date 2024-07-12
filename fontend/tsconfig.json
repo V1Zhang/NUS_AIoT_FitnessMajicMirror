@@ -11,4 +11,10 @@
   // "compilerOptions": {
   //   "ignoreDeprecations": "5.0"
   // }
+  "compilerOptions": {
+      "typeRoots": [
+        "node_modules/@types",
+        "@types"
+      ]
+    }
 }
