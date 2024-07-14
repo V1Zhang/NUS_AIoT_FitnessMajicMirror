@@ -22,10 +22,13 @@
 </template>
 
   <script>
+  import axios from 'axios'
   import img1 from '../assets/img/foream_plank.png'
   import img2 from '../assets/img/push_up.png'
   import img3 from '../assets/img/sumo_glute_bridge.png'
   import img4 from '../assets/img/lying_leg_raise.png'
+  import {useMainStore} from '../store/data.ts';
+  const mainStore = useMainStore()
 
   export default {
     data() {
@@ -66,10 +69,14 @@
     },
     handleActionClick(action) {
       console.log(`Selected action: ${action.name}`);
-      const FPath = 'http://localhost:5000/vueflask'
-      axios.post(FPath, this.$refs.action.id.value)
+      axios.post('/vueflask', { actionId: action.id })
       .then(response => {
         console.log(response.data)
+
+        mainStore.update({ text: response.data.text });
+        
+        // this.textContent = response.data.text; // 保存文本内容
+        // this.imageData = 'data:image/png;base64,' + response.data.image; // 保存图像数据
         this.$router.push('/interaction');
       })
       .catch(error => {

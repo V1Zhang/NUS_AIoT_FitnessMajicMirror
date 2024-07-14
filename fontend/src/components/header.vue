@@ -65,31 +65,31 @@ export default {
     },
     getCurrentWeather() {
       // 使用第三方API获取当前天气信息
-      axios.get('/api/weather')
-        .then(response => {
-          this.currentWeather = response.data.weather
-        })
-        .catch(error => {
-          console.error('Error fetching weather:', error)
-        })
+      // axios.get('/api/weather')
+      //   .then(response => {
+      //     this.currentWeather = response.data.weather
+      //   })
+      //   .catch(error => {
+      //     console.error('Error fetching weather:', error)
+      //   })
     },
 	getCurrentLocation() {
   // 使用浏览器地理位置API获取当前位置
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        // 根据经纬度获取城市信息
-        this.fetchLocationData(position.coords.latitude, position.coords.longitude);
-      },
-      error => {
-        console.error('Error getting location:', error);
-        this.currentLocation = 'Beijing';
-      }
-    );
-  } else {
-    console.error('Geolocation is not supported by this browser.');
-    this.currentLocation = 'Beijing';
-  }
+  // if (navigator.geolocation) {
+  //   navigator.geolocation.getCurrentPosition(
+  //     position => {
+  //       // 根据经纬度获取城市信息
+  //       this.fetchLocationData(position.coords.latitude, position.coords.longitude);
+  //     },
+  //     error => {
+  //       console.error('Error getting location:', error);
+  //       this.currentLocation = 'Beijing';
+  //     }
+  //   );
+  // } else {
+  //   console.error('Geolocation is not supported by this browser.');
+  //   this.currentLocation = 'Beijing';
+  // }
 },
 
 fetchLocationData(latitude, longitude) {

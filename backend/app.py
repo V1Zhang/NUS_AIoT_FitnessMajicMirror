@@ -1,11 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response, redirect, url_for
 from flask_cors import CORS
 from posture_analysis.posture_detection_pose1 import Foream_Plank_calculate
 from posture_analysis.posture_detection_pose2 import Push_up_calculate
 from posture_analysis.posture_detection_pose3 import Sumo_Glute_Bridge_calculate
 from posture_analysis.posture_detection_pose4 import Lying_Leg_Raise_calculate
-# import pygame
-# pygame.mixer.music.load(audio)
 
 
 
@@ -13,36 +11,56 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 # enable CORS 跨源HTTP请求控制
-CORS(app, resources={r'/*':{'origins':'*'}})
-
+CORS(app)
 
 message = ""
-audio = ""
-joints = []
+joints = [
+    [100.0, 200.0],  # Head
+    [105.0, 180.0],  # Neck
+    [110.0, 170.0],  # RShoulder
+    [120.0, 150.0],  # RElbow
+    [130.0, 130.0],  # RWrist
+    [90.0, 170.0],   # LShoulder
+    [80.0, 150.0],   # LElbow
+    [70.0, 130.0],   # LWrist
+    [125.0, 220.0],  # RHip
+    [135.0, 190.0],  # RKnee
+    [145.0, 160.0],  # RAnkle
+    [75.0, 220.0],   # LHip
+    [65.0, 190.0],   # LKnee
+    [55.0, 160.0],   # LAnkle
+    [115.0, 200.0],  # Chest
+]
 
 @app.route('/')
 def hello_world():
     return "Hello World!"
 
 
-@app.route('/vueflask', methods=['POST'])
+@app.route('/vueflask', methods=['POST', 'GET'])
 def vueflask():
-    if request.method == 'POST':
-        data = request.get_data()
+    response = jsonify({"message": "Success!"})
+    response.headers.set('Access-Control-Allow-Origin', '*')
+    if request.method == 'POST': # 如果是POST请求
+        data = request.json
+    
         action_id = data.get('actionId')
         if action_id == 1:
-            text, audio = Foream_Plank_calculate(joints)
+            text = Foream_Plank_calculate(joints)
         elif action_id == 2:
-            text, audio = Push_up_calculate(joints)
+            text = Push_up_calculate(joints)
         elif action_id == 3:
-            text, audio = Sumo_Glute_Bridge_calculate(joints)
+            text = Sumo_Glute_Bridge_calculate(joints)
         elif action_id == 4:
-            text, audio = Lying_Leg_Raise_calculate(joints)
+            text = Lying_Leg_Raise_calculate(joints)
         else:
             error = 'Invalid action ID'
-    return jsonify(int(action_id))
-        
-    # return jsonify({'text': text, 'audio': audio})
+        return jsonify({'text': text})
+    else:
+        return response
+    
+
+    
 
 
 

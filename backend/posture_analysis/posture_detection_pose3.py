@@ -1,8 +1,11 @@
+from posture_analysis.calculation import angle_calculation
+
+message = ""
+audio_path = ""
 
 
 
-
-def Sumo_Glute_Bridge_calculate():
+def Sumo_Glute_Bridge_calculate(joints):
     Head = joints[0]
     RShoulder = joints[2]
     LShoulder = joints[5]
@@ -11,10 +14,10 @@ def Sumo_Glute_Bridge_calculate():
     RAnkle = joints[10]
     LAnkle = joints[13]
     
-    angle_HSH_R = angle_calculation(Head, RShoulder, RHip)
-    angle_HSH_L = angle_calculation(Head, LShoulder, LHip)
-    angle_SHA_R = angle_calculation(RShoulder, RHip, RAnkle)
-    angle_SHA_L = angle_calculation(LShoulder, LHip, LAnkle)
+    angle_HSH_R = angle_calculation()
+    angle_HSH_L = angle_calculation()
+    angle_SHA_R = angle_calculation()
+    angle_SHA_L = angle_calculation()
     
     if angle_HSH_R < 170 or angle_HSH_L < 170:
         text_message = "您的臀部下垂，请抬起臀部"
