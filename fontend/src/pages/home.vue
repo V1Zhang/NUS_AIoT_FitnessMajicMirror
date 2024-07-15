@@ -1,5 +1,5 @@
 <template>
-	<v-header />
+	<!-- <v-header /> -->
 	<div class="content-box">
 	  <div class="content">
 		<router-view v-slot="{ Component }">
@@ -14,6 +14,6 @@
   </template>
   
   <script setup lang="ts">
-  import vHeader from '../components/header.vue';
+//   import vHeader from '../components/header.vue';
   </script>
   

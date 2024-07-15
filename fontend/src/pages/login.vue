@@ -8,9 +8,7 @@
           <input class="form-name" placeholder="username" v-model="username" type="text" autofocus>
         </div>
         <br>
-        <div class="form" style="margin-top: 20px;">
-          <input class="form-name" placeholder="password" v-model="password" type="password" autofocus>
-        </div>
+        <h2>Welcome back👋</h2>
         <br>
         <button type="submit">LOGIN</button>
       </div>
@@ -23,14 +21,12 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
     };
   },
   methods: {
     handleSubmit() {
       // Handle the form submission logic here
       console.log("Username:", this.username);
-      console.log("Password:", this.password);
       // Make an API call here to authenticate the user
     this.$router.push('/mode');
     }
@@ -66,6 +62,9 @@ export default {
 }
 
 #login_box h1 {
+  color: white;
+}
+#login_box h2 {
   color: white;
 }
 

@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <v-header />
   <div id="page_container" style="text-align: center; padding: 5px;">
     <div class="action-list">
       <div
@@ -19,6 +21,7 @@
       </div>
     </div>
   </div>
+  </div> 
 </template>
 
   <script>
@@ -28,9 +31,12 @@
   import img3 from '../assets/img/sumo_glute_bridge.png'
   import img4 from '../assets/img/lying_leg_raise.png'
   import {useMainStore} from '../store/data.ts';
+  import vHeader from '../components/header.vue';
   const mainStore = useMainStore()
-
   export default {
+    components: {
+    vHeader
+    },
     data() {
       return {
         selectedAction: null,

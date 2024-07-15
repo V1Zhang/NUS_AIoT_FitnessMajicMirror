@@ -1,15 +1,23 @@
 <template>
+  <div>
+  <v-header />
   <div id="page_container">
     <p class="custom-text">{{ text }}</p>
     <div id="image-container">
       <img src="../assets/img/example.jpg" alt="Backend Image" />
     </div>
   </div>
+</div>
 </template>
   
   <script>
   import {useMainStore} from '../store/data';
+  import vHeader from '../components/header.vue';
+  const mainStore = useMainStore()
   export default {
+  components: {
+    vHeader
+  },
   data() {
     return {
       store: useMainStore()
@@ -65,7 +73,7 @@
   font-weight: bold;
   color: white;
   text-align: right;
-  margin-top: 20px;
+  margin-top: 0px;
   padding: 10px;
   border-radius: 5px;
 }

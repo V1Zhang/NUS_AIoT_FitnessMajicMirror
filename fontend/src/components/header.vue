@@ -1,22 +1,41 @@
 <template>
-	<div class="header">
-	  <div class="logo"></div>
-	  <div class="header-right">
-		<div class="header-user-con">
-		  <div class="welcome-msg">
-			<span class="location">{{ currentLocation }}</span>
-			<span class="weather">{{ currentWeather }}</span>
-			<span class="date-time">{{ currentDate }} {{ currentDay }} {{ currentTime }}</span>
-			Hello, {{ username }}!
-		  </div>
-		  <!-- 用户名下拉菜单 -->
-		  <el-dropdown class="user-name" trigger="click" @command="handleCommand">
-			<!-- ... -->
-		  </el-dropdown>
-		</div>
-	  </div>
-	</div>
-  </template>
+  <div class="header">
+    <div class="header-center">
+      <div class="header-user-con">
+        <div class="welcome-msg">
+          <!-- 时间、日期 -->
+          <div class="current-time">
+            <div class="time">{{ currentTime }}</div>
+          </div>
+          <div class="current-date">
+          <div class="day-date">{{ currentDay }}</div>
+          <div class="day-date">{{ currentDate }}</div>
+          </div>
+          <!-- 天气、位置 -->
+          <div class="location-weather">
+          <div class="location">
+            <img src="../assets/icon/icon_location.png" alt="location icon" class="location-icon">
+            {{ currentLocation }}
+          </div>
+          <div class="weather">
+            <img src="../assets/icon/icon_cloudy.png" alt="weather icon" class="weather-icon">
+            {{ currentWeather }} {{ currentTemperature }}
+            </div>
+          </div>
+          <!-- 用户名 -->
+          <div class="username">
+            <img src="../assets/icon/icon_user.png" alt="user icon" class="user-icon">
+            Hello, {{ username }}!
+          </div>
+          <!-- 用户名下拉菜单 -->
+          <el-dropdown class="user-name" trigger="click" @command="handleCommand">
+            <!-- ... -->
+          </el-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 
 
@@ -26,13 +45,14 @@ import axios from 'axios'
 export default {
   data() {
     return {
-	  days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+	    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       username: 'Zhang V1',
-	  currentLocation: 'Beijing',
+	    currentLocation: 'Singapore',
       currentDate: '',
-	  currentDay: '',
+	    currentDay: '',
       currentTime: '',
-      currentWeather: 'Sunny'
+      currentWeather: 'Cloudy',
+      currentTemperature: '27~31°C'
     }
   },
   created() {
@@ -117,6 +137,8 @@ fetchLocationData(latitude, longitude) {
 	height: 70px;
 	font-size: 22px;
 	color: #fff;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
 }
 .collapse-btn {
 	display: flex;
@@ -127,14 +149,36 @@ fetchLocationData(latitude, longitude) {
 	padding: 0 21px;
 	cursor: pointer;
 }
-.header .logo {
-	float: left;
-	width: 250px;
-	line-height: 70px;
+.header .current-time {
+  width: 180px;
+	font-size: 50px;
 }
-.header-right {
+.header .current-date {
+  width: 150px;
+	font-size: 20px;
+}
+.header .location-weather {
+  width: 200px;
+	font-size: 20px;
+}
+.location-icon {
+  height: 20px; 
+  vertical-align: top; /* 垂直居中对齐 */
+  height: 20px; 
+  width: 25px;
+}
+.weather-icon {
+  height: 20px; 
+  vertical-align: top; /* 垂直居中对齐 */
+  height: 20px; 
+}
+.user-icon {
+  height: 30px; 
+  vertical-align: bottom; /* 垂直居中对齐 */
+  height: 30px; 
+}
+.header-center {
 	float: right;
-	padding-right: 50px;
 }
 .header-user-con {
 	display: flex;
