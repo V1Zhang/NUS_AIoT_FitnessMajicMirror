@@ -27,9 +27,10 @@
   <script>
   import axios from 'axios'
   import img1 from '../assets/img/foream_plank.png'
-  import img2 from '../assets/img/push_up.png'
+  import img2 from '../assets/img/v_brace.png'
   import img3 from '../assets/img/sumo_glute_bridge.png'
   import img4 from '../assets/img/lying_leg_raise.png'
+  import img5 from '../assets/img/left_right_bridge.png'
   import {useMainStore} from '../store/data.ts';
   import vHeader from '../components/header.vue';
   const mainStore = useMainStore()
@@ -48,7 +49,7 @@
           },
           {
             id: 2,
-            name: 'Push-up',
+            name: 'V-brace',
             imageUrl: img2
           },
           {
@@ -60,6 +61,11 @@
             id: 4,
             name: 'Lying Leg Raise',
             imageUrl: img4
+          },
+          {
+            id: 5,
+            name: 'Left/Right Bridge',
+            imageUrl: img5
           }
         ]
       }

@@ -20,3 +20,20 @@ def angle_calculation(p1, p0, p2):
     angle_degrees = math.degrees(angle_radians)
     
     return angle_degrees
+
+def horizontal(p1, p2):
+    x1, y1 = p1
+    x2, y2 = p2
+    
+     # 计算坐标差
+    delta_x = x2 - x1
+    delta_y = y2 - y1
+    
+    # 计算角度（弧度）
+    angle_radians = math.atan2(delta_y, delta_x)
+    
+    # 将弧度转换为度数
+    angle_degrees = math.degrees(angle_radians)
+    
+    return angle_degrees
+    

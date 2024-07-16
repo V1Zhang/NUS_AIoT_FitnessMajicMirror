@@ -47,7 +47,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
             title: '没有权限',
         },
-        component: () => import(/* webpackChunkName: "403" */ '../pages/403.vue'),
+        component: () => import(/* webpackChunkName: "403" */ '../components/403.vue'),
     },
 ];
 

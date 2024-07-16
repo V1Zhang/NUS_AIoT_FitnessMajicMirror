@@ -4,7 +4,7 @@
   <div id="page_container">
     <p class="custom-text">{{ text }}</p>
     <div id="image-container">
-      <img src="../assets/img/example.jpg" alt="Backend Image" />
+      <v-video />
     </div>
   </div>
 </div>
@@ -13,10 +13,12 @@
   <script>
   import {useMainStore} from '../store/data';
   import vHeader from '../components/header.vue';
+  import vVideo from '../components/video.vue';
   const mainStore = useMainStore()
   export default {
   components: {
-    vHeader
+    vHeader,
+    vVideo
   },
   data() {
     return {
@@ -60,7 +62,7 @@
   background: url("../assets/img/bg.png") center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

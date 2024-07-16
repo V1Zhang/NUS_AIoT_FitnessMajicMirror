@@ -1,7 +1,7 @@
 from posture_analysis.calculation import angle_calculation
 
 message = ""
-audio_path = ""
+
 
 # 头部 (H)
 # 肩膀 (S)

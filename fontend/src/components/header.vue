@@ -27,10 +27,6 @@
             <img src="../assets/icon/icon_user.png" alt="user icon" class="user-icon">
             Hello, {{ username }}!
           </div>
-          <!-- 用户名下拉菜单 -->
-          <el-dropdown class="user-name" trigger="click" @command="handleCommand">
-            <!-- ... -->
-          </el-dropdown>
         </div>
       </div>
     </div>
@@ -65,13 +61,6 @@ export default {
     clearInterval(this.intervalId)
   },
   methods: {
-    handleCommand(command) {
-      if (command === 'loginout') {
-        // 退出登录的逻辑
-      } else if (command === 'user') {
-        // 个人中心的逻辑
-      }
-    },
     getCurrentDateTime() {
       const currentDate = new Date()
       this.currentDate = currentDate.toLocaleDateString()
@@ -131,6 +120,7 @@ fetchLocationData(latitude, longitude) {
 
 <style scoped>
 .header {
+  background-color: black;
 	position: relative;
 	box-sizing: border-box;
 	width: 100%;
@@ -139,15 +129,7 @@ fetchLocationData(latitude, longitude) {
 	color: #fff;
   justify-content: center; /* 水平居中 */
   align-items: center; /* 垂直居中 */
-}
-.collapse-btn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-	float: left;
-	padding: 0 21px;
-	cursor: pointer;
+  display: flex;
 }
 .header .current-time {
   width: 180px;
@@ -174,7 +156,7 @@ fetchLocationData(latitude, longitude) {
 }
 .user-icon {
   height: 30px; 
-  vertical-align: bottom; /* 垂直居中对齐 */
+  vertical-align: top; /* 垂直居中对齐 */
   height: 30px; 
 }
 .header-center {
@@ -185,35 +167,7 @@ fetchLocationData(latitude, longitude) {
 	height: 70px;
 	align-items: center;
 }
-.btn-fullscreen {
-	transform: rotate(45deg);
-	margin-right: 5px;
-	font-size: 24px;
-}
-.btn-bell,
-.btn-fullscreen {
-	position: relative;
-	width: 30px;
-	height: 30px;
-	text-align: center;
-	border-radius: 15px;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-}
-.btn-bell-badge {
-	position: absolute;
-	right: 4px;
-	top: 0px;
-	width: 8px;
-	height: 8px;
-	border-radius: 4px;
-	background: #f56c6c;
-	color: #fff;
-}
-.btn-bell .el-icon-lx-notice {
-	color: #fff;
-}
+
 .user-name {
 	margin-left: 10px;
 }

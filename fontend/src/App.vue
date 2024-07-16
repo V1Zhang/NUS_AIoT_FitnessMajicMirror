@@ -8,6 +8,3 @@
 import { ElConfigProvider } from 'element-plus';
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 </script>
-<style>
-@import './assets/css/main.css';
-</style>
