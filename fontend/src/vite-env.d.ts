@@ -21,3 +21,7 @@ declare module 'vue-core-video-player' {
         options?: CORSOptions
       ): void;
     }
+    declare module 'vue-aliplayer-v2'{
+
+}
+    

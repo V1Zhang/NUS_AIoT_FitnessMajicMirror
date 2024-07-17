@@ -1,10 +1,6 @@
 from flask import Flask, request, jsonify, make_response, redirect, url_for
 from flask_cors import CORS
-from posture_analysis.pose1_Foream_Plank import Foream_Plank_calculate
-from posture_analysis.pose2_V_Brace import V_Brace_calculate
-from posture_analysis.pose3_Sumo_Glute_Bridge import Sumo_Glute_Bridge_calculate
-from posture_analysis.pose4_Lying_Leg_Raise import Lying_Leg_Raise_calculate
-from posture_analysis.pose5_Left_Right_Bridge import Left_Right_Bridge_calculate
+from posture_analysis.posture_analysis import Foream_Plank_Calculate, V_Brace_Calculate, Sumo_Glute_Bridge_Calculate, Lying_Leg_Raise_Calculate, Left_Right_Bridge_Calculate
 
 
 
@@ -47,15 +43,15 @@ def vueflask():
     
         action_id = data.get('actionId')
         if action_id == 1:
-            text = Foream_Plank_calculate(joints)
+            text = Foream_Plank_Calculate(joints)
         elif action_id == 2:
-            text = V_Brace_calculate(joints)
+            text = V_Brace_Calculate(joints)
         elif action_id == 3:
-            text = Sumo_Glute_Bridge_calculate(joints)
+            text = Sumo_Glute_Bridge_Calculate(joints)
         elif action_id == 4:
-            text = Lying_Leg_Raise_calculate(joints)
+            text = Lying_Leg_Raise_Calculate(joints)
         elif action_id == 5:
-            text = Left_Right_Bridge_calculate(joints)
+            text = Left_Right_Bridge_Calculate(joints)
         else:
             error = 'Invalid action ID'
         return jsonify({'text': text})

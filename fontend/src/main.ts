@@ -5,6 +5,8 @@ import App from './App.vue';
 import router from './router';
 import { usePermissStore } from './store/permiss';
 import 'element-plus/dist/index.css';
+import VueAliplayerV2 from 'vue-aliplayer-v2';
+ 
 
 import axios from "axios";
 
@@ -17,6 +19,7 @@ axios.defaults.headers["Content-Type"] =  "application/json;charset=UTF-8"
 const app = createApp(App);
 app.use(createPinia());
 app.use(router);
+app.use(VueAliplayerV2)
 
 // 注册elementplus图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

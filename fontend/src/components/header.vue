@@ -37,18 +37,24 @@
 
 <script>
 import axios from 'axios'
-
+import {useMainStore} from '../store/data';
+const mainStore = useMainStore()
 export default {
   data() {
     return {
+      store: useMainStore(),
 	    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      username: 'Zhang V1',
 	    currentLocation: 'Singapore',
       currentDate: '',
 	    currentDay: '',
       currentTime: '',
       currentWeather: 'Cloudy',
       currentTemperature: '27~31°C'
+    }
+  },
+  computed: {
+    username() {
+      return this.store.username
     }
   },
   created() {

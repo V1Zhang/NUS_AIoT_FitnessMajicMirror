@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import {useMainStore} from '../store/data.ts';
+const mainStore = useMainStore()
 export default {
   data() {
     return {
@@ -27,8 +29,8 @@ export default {
     handleSubmit() {
       // Handle the form submission logic here
       console.log("Username:", this.username);
-      // Make an API call here to authenticate the user
-    this.$router.push('/mode');
+      mainStore.login({ username: this.username });
+      this.$router.push('/mode');
     }
   }
 };
