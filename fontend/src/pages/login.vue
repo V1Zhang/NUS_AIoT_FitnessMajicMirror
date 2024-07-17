@@ -8,7 +8,7 @@
           <input class="form-name" placeholder="username" v-model="username" type="text" autofocus>
         </div>
         <br>
-        <h2>Welcome back👋</h2>
+        <h2>Welcome Back!👋</h2>
         <br>
         <button type="submit">LOGIN</button>
       </div>
@@ -18,6 +18,7 @@
 
 <script>
 import {useMainStore} from '../store/data.ts';
+
 const mainStore = useMainStore()
 export default {
   data() {
@@ -29,7 +30,7 @@ export default {
     handleSubmit() {
       // Handle the form submission logic here
       console.log("Username:", this.username);
-      mainStore.login({ username: this.username });
+      mainStore.login({username: this.username});
       this.$router.push('/mode');
     }
   }
@@ -39,10 +40,8 @@ export default {
 <style scoped>
 #Home_page {
   background: url("../assets/img/login_bg.png") center; /* 增加背景图 */
-  background-size: 100% auto; /* 设置背景的大小 */
+  background-size: 100% 100%; /* 设置背景的大小 */
   background-repeat: no-repeat; /* 将背景设置为不重复显示 */
-  background-position: center; /* 将背景图片居中显示 */
-  background-repeat: no-repeat; /* 背景图片不重复 */
   height: 100vh; /* 设置容器高度为视口高度 */
   display: flex;
   justify-content: center;
@@ -54,18 +53,19 @@ export default {
   width: 350px;
   text-align: center;
   margin: 0 auto;
-  margin-top: 10%;  /* 高度调整 */
+  margin-top: 10%; /* 高度调整 */
   background: #00000080;
   padding: 20px 50px;
   /* 将按钮的左右边框设置为圆弧 */
-  border-radius: 30px; 
+  border-radius: 30px;
   /* 圆角弧度24px */
-  transition:0.2s;
+  transition: 0.2s;
 }
 
 #login_box h1 {
   color: white;
 }
+
 #login_box h2 {
   color: white;
 }
@@ -81,7 +81,7 @@ export default {
 }
 
 #login_box button {
-  width: 150px; 
+  width: 150px;
   text-transform: uppercase;
   border: 3px solid #FFFFFF; /* 设置按钮的边界粗细和颜色 */
   margin-top: 18px; /* 设置合适的上部外框的宽度，增加与上面的password框的距离 */
@@ -92,9 +92,6 @@ export default {
   border-radius: 30px; /* 将按钮的左右边框设置为圆弧 */
   cursor: pointer;
   transition: 0.2s;
-  background: rgba(0,0,0,0);   
+  background: rgba(0, 0, 0, 0);
 }
-
-
-
 </style>

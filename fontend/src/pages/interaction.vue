@@ -1,37 +1,49 @@
 <template>
   <div>
-  <v-header />
-  <div id="page_container">
-    <p class="custom-text">{{ text }}</p>
-    <div id="image-container">
-      <v-video />
-    </div>
-  </div>
-
-  <div class="popVideo" id="popVideoBox" @mousemove.stop="mousemove" @mouseleave.stop="mouseleave">
-      <div class="open" v-open></div>
-      <div class="drag" v-drag>
-        <div class="videoPop">
-          <div v-show="replaceIcon" class="videoReplay" @click="changeVideoId">替换</div>
-          <div class="closeVideo" @click="close"></div>
+    <v-header/>
+    <div id="page_container">
+      <div class="container">
+        <div class="action">
+          <img src="../assets/icon/action.svg" alt="action icon" class="action-icon">
+          Fitness Action: {{ actionName }}
         </div>
-        <vue-aliplayer-v2 class="aliplayerCon" :source="modelVideoUrl" 
-                  ref="popVideo"
-                  :options="options"
-                  @snapshoted="snapshoted"/>
-
+        <div class="heart">
+          <img src="../assets/icon/heart.svg" alt="heart icon" class="heart-icon">
+          Heart Rate: {{ heartRate }} / BPM
+        </div>
+      </div>
+      <div id="image-container">
+        <v-video/>
+      </div>
+      <div class="warning">
+        <img src="../assets/icon/warning.svg" alt="warning icon" class="warning-icon">
+        <p class="custom-text">
+          Posture Tips: {{ message }}</p>
       </div>
     </div>
-</div>
+    <!--    <div class="popVideo" id="popVideoBox" @mousemove.stop="mousemove" @mouseleave.stop="mouseleave">-->
+    <!--      <div class="open" v-open></div>-->
+    <!--      <div class="drag" v-drag>-->
+    <!--        <div class="videoPop">-->
+    <!--          <div v-show="replaceIcon" class="videoReplay" @click="changeVideoId">替换</div>-->
+    <!--          <div class="closeVideo" @click="close"></div>-->
+    <!--        </div>-->
+    <!--        <vue-aliplayer-v2 class="aliplayerCon" :source="modelVideoUrl"-->
+    <!--                          ref="popVideo"-->
+    <!--                          :options="options"-->
+    <!--                          @snapshoted="snapshoted"/>-->
+    <!--      </div>-->
+    <!--    </div>-->
+  </div>
 </template>
-  
-  <script>
-  import {useMainStore} from '../store/data';
-  import vHeader from '../components/header.vue';
-  import vVideo from '../components/video.vue';
-  const mainStore = useMainStore()
-  export default {
-    directives: {
+
+<script>
+import {useMainStore} from '../store/data';
+import vHeader from '../components/header.vue';
+import vVideo from '../components/video.vue';
+
+export default {
+  directives: {
     // 拖拽
     drag(el) {
       var odiv = document.getElementById("popVideoBox")
@@ -105,7 +117,6 @@
       }
     }
   },
-
   components: {
     vHeader,
     vVideo
@@ -116,75 +127,142 @@
       videoPopUrl: '', // 初始化视频地址为空
       options: {},    // 初始化视频播放选项
       replaceIcon: false, // 根据需要初始化替换图标的显示状态
-      store: useMainStore()
+      store: useMainStore(),
+      message: 'Great, keep it up!',
+      heartRate: 77,
+      actionName: "Foream Plank"
     }
   },
-  computed: {
-    text() {
-      return this.store.text
-    }
-  },
-  watch: {
-    text() {
-      this.playVoice();
-    }
+  created() {
+    this.fetchMessage();
   },
   mounted() {
-        this.store.fetchText()
-        this.playVoice();
-      },
+    this.fetchAction();
+    this.generateRandomHeartRate();
+    this.interval = setInterval(this.generateRandomHeartRate, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
   methods: {
-      playVoice() {
-        this.handleSpeak(this.text)
-      },
-      handleSpeak(text){
-        const synth = window.speechSynthesis;
-        const msg = new SpeechSynthesisUtterance();
-        msg.text = text;
-        msg.lang = "zh-CN"; //使用的语言
-        msg.volumn = 1; //声音音量
-        msg.rate = 1; //语速
-        msg.pitch = 1; //音高
-        synth.speak(msg); //播放
-      }
+    handleSpeak(text) {
+      const synth = window.speechSynthesis;
+      const msg = new SpeechSynthesisUtterance();
+      msg.text = text;
+      msg.lang = "zh-CN"; //使用的语言
+      msg.volumn = 1; //声音音量
+      msg.rate = 1; //语速
+      msg.pitch = 1; //音高
+      synth.speak(msg); //播放
+    },
+    fetchMessage() {
+      setInterval(() => {
+        fetch(`http://172.20.10.12:7777/get_message?text=${encodeURIComponent(this.store.text)}`)
+            .then(response => response.text())
+            .then(data => {
+              this.message = data;
+              this.handleSpeak(this.message);
+            })
+            .catch(error => console.error('Error fetching message:', error));
+      }, 10000);
+    },
+    generateRandomHeartRate() {
+      const change = Math.trunc((Math.random() * 10) - 5);
+      this.heartRate = Math.max(60, Math.min(180, this.heartRate + change));
+    },
+    fetchAction() {
+      this.actionName = this.store.name;
     }
   }
-  </script>
-  
-  <style scoped>
-  #page_container {
+}
+</script>
+
+<style scoped>
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+}
+
+#page_container {
   background: url("../assets/img/bg.png") center;
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
-  height: 92vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.container {
+  margin-top: -12%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action, .heart {
+  display: flex;
+  align-items: center;
+  margin: 0 29px;
+}
+
+.heart {
+  animation: heartbeat 1s infinite;
+}
+
+.warning {
+  display: flex;
+  align-items: center;
+  background-color: #000000;
+  border-radius: 37px;
+  border: 3px solid #FFFFFF;
+  height: 52px;
+  padding: 9px 17px;
+  max-width: 440px;
+}
+
+.action:hover, .warning:hover {
+  transform: scale(1.2);
+}
+
+.action-icon, .heart-icon, .warning-icon {
+  margin-right: 10px;
+  height: 37px;
+  width: 37px;
 }
 
 .custom-text {
-  font-family: 'Arial', sans-serif;
-  font-size: 18px;
+  font-size: 27px;
   font-weight: bold;
   color: white;
-  text-align: right;
-  margin-top: 0px;
-  padding: 10px;
-  border-radius: 5px;
 }
 
-  #image-container {
-    background-color: white;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    width: 500px; /* 设置小窗口的宽度 */
-    height: 400px; /* 设置小窗口的高度 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+#image-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 720px; /* 设置小窗口的宽度 */
+  height: 540px; /* 设置小窗口的高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
+  margin-bottom: -37px;
+}
 
 #image-container img {
   max-width: 100%;
@@ -194,7 +272,6 @@
 
 /* 视频弹窗样式 */
 .popVideo {
-
   position: absolute;
   float: left;
   width: 2.22rem;
@@ -204,7 +281,7 @@
   z-index: 9999;
   background-color: #fff; /*设置背景色为白色 */
 }
- 
+
 .open {
   position: absolute;
   cursor: se-resize;
@@ -213,15 +290,14 @@
   bottom: 0;
   right: 0;
   z-index: 132;
- 
+
 }
- 
+
 .drag {
   position: absolute;
-  position: center;
   width: 100%;
   height: 100%;
-  padding: 0px;
+  padding: 0;
   z-index: 125;
 }
-  </style>
+</style>

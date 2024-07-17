@@ -1,25 +1,20 @@
-import { createApp } from 'vue';
-import { createPinia } from 'pinia';
+import {createApp} from 'vue';
+import {createPinia} from 'pinia';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import App from './App.vue';
 import router from './router';
-import { usePermissStore } from './store/permiss';
+import {usePermissStore} from './store/permiss';
 import 'element-plus/dist/index.css';
-import VueAliplayerV2 from 'vue-aliplayer-v2';
- 
+import './assets/font/font.css'
 
 import axios from "axios";
 
-// import VueCoreVideoPlayer from 'vue-core-video-player'
-
 axios.defaults.baseURL = "http://localhost:5000"
-axios.defaults.headers["Content-Type"] =  "application/json;charset=UTF-8"
-
+axios.defaults.headers["Content-Type"] = "application/json;charset=UTF-8"
 
 const app = createApp(App);
 app.use(createPinia());
 app.use(router);
-app.use(VueAliplayerV2)
 
 // 注册elementplus图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -34,7 +29,5 @@ app.directive('permiss', {
         }
     },
 });
-
-
 
 app.mount('#app');
